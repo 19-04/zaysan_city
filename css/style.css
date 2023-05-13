@@ -76,7 +76,7 @@ a:focus {
 /**********************************/
 .top-bar {
     position: relative;
-    height: 90px;
+    height: 175px;
     background: #000000;
 }
 
@@ -102,7 +102,7 @@ a:focus {
 .top-bar .top-bar-right {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .top-bar .text {
@@ -113,7 +113,7 @@ a:focus {
     height: 90px;
     padding: 0 20px;
     text-align: center;
-    border-left: 1px solid rgba(255, 255, 255, .15);
+    /* border-left: 1px solid rgba(255, 255, 255, .15); */
 }
 
 .top-bar .text h2 {
@@ -161,6 +161,10 @@ a:focus {
 @media (min-width: 992px) {
     .top-bar {
         padding: 0 60px;
+        height: 90px;
+    }
+    .top-bar .text{
+        border-left: 1px solid rgba(255, 255, 255, .15);
     }
 }
 
@@ -185,7 +189,7 @@ a:focus {
 }
 
 .nav-bar.nav-sticky {
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
     padding: 10px 0;
@@ -477,7 +481,7 @@ a:focus {
     position: relative;
     font-size: 50px;
     font-weight: 700;
-    white-space: nowrap;
+    white-space: pre-wrap;
     z-index: 1;
 }
 
@@ -573,6 +577,7 @@ a:focus {
     color: #ffffff;
     font-size: 30px;
     font-weight: 600;
+    overflow-wrap: break-word;
 }
 
 .feature-top .feature-item p {
