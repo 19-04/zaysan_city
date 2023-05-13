@@ -1,8 +1,8 @@
 {
     "name": "Zaysan",
-    "short_name": "App",
+    "short_name": "Zaysan",
     "description": "Zaysan City",
-    "start_url": "/index.html",
+    "start_url": "/zaysan_city/index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
