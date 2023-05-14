@@ -1547,7 +1547,47 @@ a:focus {
     background: #aa9166;
 }
 
+/* ----------------------------------------------- */
+.comment_blog{
+    display: flex;
+    justify-content: center;
+}
+.comment_blog .contact-form-index {
+    position: relative;
+    margin-bottom: 30px;
+}
 
+.comment_blog .contact-form-index input {
+    height: 60px;
+    border-radius: 0;
+    border-width: 2px;
+    border-color: #121518;
+}
+
+.comment_blog .contact-form-index textarea {
+    height: 190px;
+    border-radius: 0;
+    border-width: 2px;
+    border-color: #121518;
+}
+
+.comment_blog .contact-form-index .btn {
+    padding: 16px 35px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #aa9166;
+    background: #121518;
+    border: 2px solid #aa9166;
+    border-radius: 0;
+    transition: .3s;
+}
+
+.comment_blog .contact-form-index .btn:hover {
+    color: #121518;
+    background: #aa9166;
+}
 /*******************************/
 /******* Single Page CSS *******/
 /*******************************/

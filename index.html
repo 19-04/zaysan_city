@@ -21,6 +21,7 @@
         <link rel="manifest" href="manifest.json">
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.28.5/dist/umd/supabase.min.js"></script>
     </head>
 
     <body>
@@ -301,7 +302,33 @@
                 </div>
             </div>
             <!-- FAQs End -->
-
+            <div class="comment_blog">
+                <div class="col-md-6">
+                    <div class="contact-form-index">
+                        <form id="comment-form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="username" placeholder="атыңыз" required="required" onBlur="validateInput('username', 1, 20, 'Аты жөн 1 және 20 таңба арасында болуы керек')" />
+                                <p id="username-error" style="color:red;"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="email" placeholder="Email" required="required" onBlur="validateEmailInput()" />
+                                <p id="email-error" style="color:red;"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="recipient" placeholder="кімге" required="required" onBlur="validateInput('recipient', 1, 20, 'Аты жөн 1 және 20 таңба арасында болуы керек')" />
+                                <p id="recipient-error" style="color:red;"></p>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" id="comment" placeholder="сұрағыңыз" required="required" onBlur="validateInput('comment', 5, '', 'Сұрағыңыз кемінде 5 таңбадан тұруы керек')" ></textarea>
+                                <p id="comment-error" style="color:red;"></p>
+                            </div>
+                            <div>
+                                <button type="button" onclick="sendComment()">хабарласу</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <!-- Testimonial Start -->
             <div class="testimonial">
