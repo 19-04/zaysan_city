@@ -205,14 +205,17 @@ document.getElementById('close-button').addEventListener('click', function() {
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('beforeinstallprompt event fired');
     e.preventDefault();
     deferredPrompt = e;
     document.getElementById('pwa-banner').style.display = 'block';
 });
 
 document.getElementById('install-button').addEventListener('click', (e) => {
+    console.log('Install button clicked');
     document.getElementById('pwa-banner').style.display = 'none';
     if (deferredPrompt) {
+        console.log('Prompting user');
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === 'accepted') {
@@ -222,8 +225,11 @@ document.getElementById('install-button').addEventListener('click', (e) => {
             }
             deferredPrompt = null;
         });
+    } else {
+        console.log('Deferred prompt is not available');
     }
 });
+
 
 
 
