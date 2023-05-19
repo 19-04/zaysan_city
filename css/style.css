@@ -1634,13 +1634,11 @@ a:focus {
     background: #0056b3;
 }
 .close-button {
-    position: absolute;
-    right: 10px;
-    top: 10px;
     background: none;
     border: none;
     font-size: 20px;
     cursor: pointer;
+    align-self: flex-start;
 }
 
 .close-button:hover {

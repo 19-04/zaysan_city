@@ -3,9 +3,6 @@ self.addEventListener('install', function(event) {
       caches.open('my-cache').then(function(cache) {
         return cache.addAll([
           '/',
-          '/zaysan_city/index.html',
-          '/zaysan_city/css/style.css',
-          '/zaysan_city/js/main.js',
         ]);
       })
     );

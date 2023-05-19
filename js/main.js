@@ -177,15 +177,15 @@ function validateEmail(email) {
 }
 
 
-window.onload = function() {
-    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    var isInPWA = (window.matchMedia('(display-mode: standalone)').matches) || (window.navigator.standalone) || document.referrer.includes('android-app://');
+// window.onload = function() {
+//     var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+//     var isInPWA = (window.matchMedia('(display-mode: standalone)').matches) || (window.navigator.standalone) || document.referrer.includes('android-app://');
 
-    if (isMobile && !isInPWA) {
-        var banner = document.getElementById('pwa-banner');
-        banner.style.display = 'block';
-    }
-}
+//     if (isMobile && !isInPWA) {
+//         var banner = document.getElementById('pwa-banner');
+//         banner.style.display = 'block';
+//     }
+// }
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/zaysan_city/sw.js').then(function(registration) {
@@ -208,6 +208,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     console.log('beforeinstallprompt event fired');
     e.preventDefault();
     deferredPrompt = e;
+    // Show the install banner only when beforeinstallprompt is fired
     document.getElementById('pwa-banner').style.display = 'block';
 });
 
@@ -229,6 +230,7 @@ document.getElementById('install-button').addEventListener('click', (e) => {
         console.log('Deferred prompt is not available');
     }
 });
+
 
 
 
