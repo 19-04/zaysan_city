@@ -196,26 +196,26 @@ document.getElementById('close-button').addEventListener('click', function() {
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  var banner = document.getElementById('pwa-banner');
-  banner.style.display = 'block';
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('pwa-banner').style.display = 'block';
 });
-
 
 document.getElementById('install-button').addEventListener('click', (e) => {
-  var banner = document.getElementById('pwa-banner');
-  banner.style.display = 'none';
-  deferredPrompt.prompt();
-  deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('User accepted the A2HS prompt');
-      } else {
-        console.log('User dismissed the A2HS prompt');
-      }
-      deferredPrompt = null;
-    });
+    document.getElementById('pwa-banner').style.display = 'none';
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+            } else {
+                console.log('User dismissed the install prompt');
+            }
+            deferredPrompt = null;
+        });
+    }
 });
+
 
 
 
