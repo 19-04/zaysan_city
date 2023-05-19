@@ -209,7 +209,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
     // Show the install banner only when beforeinstallprompt is fired
-    document.getElementById('pwa-banner').style.display = 'block';
+    // document.getElementById('pwa-banner').style.display = 'block';
 });
 
 document.getElementById('install-button').addEventListener('click', (e) => {
