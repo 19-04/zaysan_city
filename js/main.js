@@ -188,7 +188,7 @@ window.onload = function() {
 }
 
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+    navigator.serviceWorker.register('/zaysan_city/sw.js').then(function(registration) {
         console.log('Service Worker 注册成功，范围是：', registration.scope);
     }).catch(function(err) {
         console.log('Service Worker 注册失败：', err);
