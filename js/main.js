@@ -171,8 +171,81 @@ async function sendComment() {
     });
 }
 
-// A separate function to validate email format
 function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
+
+
+window.onload = function() {
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    var isInPWA = (window.matchMedia('(display-mode: standalone)').matches) || (window.navigator.standalone) || document.referrer.includes('android-app://');
+
+    if (isMobile && !isInPWA) {
+        var banner = document.getElementById('pwa-banner');
+        banner.style.display = 'block';
+    }
+}
+
+document.getElementById('close-button').addEventListener('click', function() {
+    var banner = document.getElementById('pwa-banner');
+    banner.style.display = 'none';
+});
+
+
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  var banner = document.getElementById('pwa-banner');
+  banner.style.display = 'block';
+});
+
+
+document.getElementById('install-button').addEventListener('click', (e) => {
+  var banner = document.getElementById('pwa-banner');
+  banner.style.display = 'none';
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the A2HS prompt');
+      } else {
+        console.log('User dismissed the A2HS prompt');
+      }
+      deferredPrompt = null;
+    });
+});
+
+
+
+const fetchData = async () => {
+    const { data, error } = await _supabase
+      .from('upload_news')
+      .select('*');
+  
+    if (error) {
+      console.error('Error: ', error);
+    } else {
+      const newsList = document.querySelector('.news-list');
+      data.forEach(item => {
+        const newsItem = document.createElement('div');
+        newsItem.className = 'news-item';
+        newsItem.innerHTML = `
+          <div class="news-inner">
+            <img class="news-image" src="data:image/png;base64,${item.image}" alt="news image">
+            <div class="news-content">
+              <p class="news-description">${item.content}</p>
+              <div class="news-date">Ұақыты: ${item.date_published}</div>
+            </div>
+          </div>
+        `;
+        newsList.appendChild(newsItem);
+      });
+    }
+  };
+  
+  window.addEventListener('DOMContentLoaded', (event) => {
+    fetchData();
+  });
+  

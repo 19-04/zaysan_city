@@ -1588,6 +1588,65 @@ a:focus {
     color: #121518;
     background: #aa9166;
 }
+#pwa-banner {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    background: #f8f8f8;
+    z-index: 999999;
+  }
+  .banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-icon {
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+}
+
+.banner-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.banner-text p {
+    margin-bottom: 10px;
+}
+
+#install-button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#install-button:hover {
+    background: #0056b3;
+}
+.close-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: red;
+}
+
 /*******************************/
 /******* Single Page CSS *******/
 /*******************************/
