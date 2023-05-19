@@ -246,13 +246,18 @@ const fetchData = async () => {
     } else {
       const newsList = document.querySelector('.news-list');
       data.forEach(item => {
+        let content = item.content;
+        if(content.length > 30){
+          content = content.substring(0, 60) + '...';
+        }
+  
         const newsItem = document.createElement('div');
         newsItem.className = 'news-item';
         newsItem.innerHTML = `
           <div class="news-inner">
             <img class="news-image" src="data:image/png;base64,${item.image}" alt="news image">
             <div class="news-content">
-              <p class="news-description">${item.content}</p>
+              <p class="news-description">${content}</p>
               <div class="news-date">Ұақыты: ${item.date_published}</div>
             </div>
           </div>
