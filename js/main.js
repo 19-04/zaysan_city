@@ -187,6 +187,15 @@ window.onload = function() {
     }
 }
 
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+        console.log('Service Worker 注册成功，范围是：', registration.scope);
+    }).catch(function(err) {
+        console.log('Service Worker 注册失败：', err);
+    });
+}
+
+
 document.getElementById('close-button').addEventListener('click', function() {
     var banner = document.getElementById('pwa-banner');
     banner.style.display = 'none';
