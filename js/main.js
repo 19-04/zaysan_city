@@ -107,7 +107,7 @@ const SUPABASE_ANON_KEY =
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-function validateInput(id, minLength, maxLength, errorMsg,isMinimum = false) {
+function validateInput(id, minLength, maxLength, errorMsg, isMinimum = false) {
   const input = document.getElementById(id);
   const error = document.getElementById(id + "-error");
 
@@ -120,21 +120,20 @@ function validateInput(id, minLength, maxLength, errorMsg,isMinimum = false) {
   }
 }
 
-
 function validateEmailInput() {
-    const email = document.getElementById('email');
-    const error = document.getElementById('email-error');
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const email = document.getElementById("email");
+  const error = document.getElementById("email-error");
+  var re =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if (!re.test(email.value)) {
-        error.textContent = 'Жарамды электрондық поштаны енгізіңіз';
-        email.style.borderColor = 'red';
-    } else {
-        error.textContent = '';
-        email.style.borderColor = '';
-    }
+  if (!re.test(email.value)) {
+    error.textContent = "Жарамды электрондық поштаны енгізіңіз";
+    email.style.borderColor = "red";
+  } else {
+    error.textContent = "";
+    email.style.borderColor = "";
+  }
 }
-
 
 async function sendComment() {
   const username = document.getElementById("username");
@@ -172,10 +171,10 @@ async function sendComment() {
 }
 
 function validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+  var re =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
 }
-
 
 // window.onload = function() {
 //     var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -187,73 +186,67 @@ function validateEmail(email) {
 //     }
 // }
 
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/zaysan_city/sw.js').then(function(registration) {
-        console.log('Service Worker 注册成功，范围是：', registration.scope);
-    }).catch(function(err) {
-        console.log('Service Worker 注册失败：', err);
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/zaysan_city/sw.js")
+    .then(function (registration) {
+      console.log("Service Worker 注册成功，范围是：", registration.scope);
+    })
+    .catch(function (err) {
+      console.log("Service Worker 注册失败：", err);
     });
 }
 
-
-document.getElementById('close-button').addEventListener('click', function() {
-    var banner = document.getElementById('pwa-banner');
-    banner.style.display = 'none';
+document.getElementById("close-button").addEventListener("click", function () {
+  var banner = document.getElementById("pwa-banner");
+  banner.style.display = "none";
 });
-
 
 let deferredPrompt;
 
-window.addEventListener('beforeinstallprompt', (e) => {
-    console.log('beforeinstallprompt event fired');
-    e.preventDefault();
-    deferredPrompt = e;
-    // Show the install banner only when beforeinstallprompt is fired
-    // document.getElementById('pwa-banner').style.display = 'block';
+window.addEventListener("beforeinstallprompt", (e) => {
+  console.log("beforeinstallprompt event fired");
+  e.preventDefault();
+  deferredPrompt = e;
+  // Show the install banner only when beforeinstallprompt is fired
+  // document.getElementById('pwa-banner').style.display = 'block';
 });
 
-document.getElementById('install-button').addEventListener('click', (e) => {
-    console.log('Install button clicked');
-    document.getElementById('pwa-banner').style.display = 'none';
-    if (deferredPrompt) {
-        console.log('Prompting user');
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the install prompt');
-            } else {
-                console.log('User dismissed the install prompt');
-            }
-            deferredPrompt = null;
-        });
-    } else {
-        console.log('Deferred prompt is not available');
-    }
+document.getElementById("install-button").addEventListener("click", (e) => {
+  console.log("Install button clicked");
+  document.getElementById("pwa-banner").style.display = "none";
+  if (deferredPrompt) {
+    console.log("Prompting user");
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === "accepted") {
+        console.log("User accepted the install prompt");
+      } else {
+        console.log("User dismissed the install prompt");
+      }
+      deferredPrompt = null;
+    });
+  } else {
+    console.log("Deferred prompt is not available");
+  }
 });
-
-
-
-
-
 
 const fetchData = async () => {
-    const { data, error } = await _supabase
-      .from('upload_news')
-      .select('*');
-  
-    if (error) {
-      console.error('Error: ', error);
-    } else {
-      const newsList = document.querySelector('.news-list');
-      data.forEach(item => {
-        let content = item.content;
-        if(content.length > 30){
-          content = content.substring(0, 60) + '...';
-        }
-  
-        const newsItem = document.createElement('div');
-        newsItem.className = 'news-item';
-        newsItem.innerHTML = `
+  const { data, error } = await _supabase.from("upload_news").select("*");
+
+  if (error) {
+    console.error("Error: ", error);
+  } else {
+    const newsList = document.querySelector(".news-list");
+    data.forEach((item) => {
+      let content = item.content;
+      if (content.length > 30) {
+        content = content.substring(0, 60) + "...";
+      }
+
+      const newsItem = document.createElement("div");
+      newsItem.className = "news-item";
+      newsItem.innerHTML = `
           <div class="news-inner">
             <img class="news-image" src="data:image/png;base64,${item.image}" alt="news image">
             <div class="news-content">
@@ -262,12 +255,11 @@ const fetchData = async () => {
             </div>
           </div>
         `;
-        newsList.appendChild(newsItem);
-      });
-    }
-  };
-  
-  window.addEventListener('DOMContentLoaded', (event) => {
-    fetchData();
-  });
-  
+      newsList.appendChild(newsItem);
+    });
+  }
+};
+
+window.addEventListener("DOMContentLoaded", (event) => {
+  fetchData();
+});
